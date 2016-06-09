@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Arce 0406</title>
+    <meta name="author" content="Arce0406">
+    <meta name="description" content="Test page for Arce.">
+    <meta name="keywords" content="C#,music,magic,minecraft,bukkit,plugin,mabinogi">
+    <link rev="made" href="mailto:ArceFeather@gmail.com">
+    <!--CSS檔-->
+    <link rel="stylesheet" href="main.css">
+
+    <!--Session-->
+    <script type="text/javascript">
+        function record(value) {
+            window.sessionStorage.setItem("key", "value");
+            window.sessionStorage.getItem("key");
+            document.write(sessionStorage.view_index);
+        }
+    </script>
+    <!--變更控制-->
+    <script>
+        function updateUI(value) {
+            if (value == document.getElementById("currect").value)
+                return;
+
+            // 還原所有格式
+            for (i = 0; i < document.getElementById("ImagePanel").children.length; i++) {
+                if (i != (value - 1)) {
+                    //document.getElementById("mainPanel").children[i].classList.remove("Img_Selected");
+                    //document.getElementById("mainPanel").children[i].classList.add("Img_Default");
+                    document.getElementById("page_navigate_bar").children[i].classList.remove("page_item_select");
+                    document.getElementById("page_navigate_bar").children[i].classList.add("page_item_default");
+                } else {
+                    //document.getElementById("mainPanel").children[i].classList.remove("Img_Default");
+                    //document.getElementById("mainPanel").children[i].classList.add("Img_Selected");
+                    document.getElementById("page_navigate_bar").children[i].classList.remove("page_item_default");
+                    document.getElementById("page_navigate_bar").children[i].classList.add("page_item_select");
+                }
+            }
+
+            var a = document.getElementById(("f" + document.getElementById("currect").value.toString()));
+            var b = document.getElementById(("f" + value.toString()));
+
+            // For check : last item
+            document.getElementById("last").value = document.getElementById("currect").value;
+
+            // Remove last image "Fade in" class, add "Fade out"
+            a.classList.remove("fade_in");
+            a.classList.add("fade_out");
+
+            // For effect temp
+            document.getElementById("currect").value = value;
+
+            // Remove currect image "Fade out" class，add "Fade in"
+            b.classList.remove("fade_out");
+            b.classList.add("fade_in");
+        }
+
+        var myVar;
+
+        function Timer_Tick() {
+            var value = parseInt(document.getElementById("currect").value) + 1;
+            if (value > document.getElementById("ImagePanel").children.length)
+                value = 1;
+
+            document.getElementById("status").value = value;
+
+            // 還原所有格式
+            for (i = 0; i < document.getElementById("ImagePanel").children.length; i++) {
+                if (i != (value - 1)) {
+                    document.getElementById("page_navigate_bar").children[i].classList.remove("page_item_select");
+                    document.getElementById("page_navigate_bar").children[i].classList.add("page_item_default");
+                } else {
+                    document.getElementById("page_navigate_bar").children[i].classList.remove("page_item_default");
+                    document.getElementById("page_navigate_bar").children[i].classList.add("page_item_select");
+                }
+            }
+
+            var a = document.getElementById(("f" + document.getElementById("currect").value.toString()));
+            var b = document.getElementById(("f" + value.toString()));
+
+            // For check : last item
+            document.getElementById("last").value = document.getElementById("currect").value;
+
+            // Remove last image "Fade in" class, add "Fade out"
+            a.classList.remove("fade_in");
+            a.classList.add("fade_out");
+
+            // For effect temp
+            document.getElementById("currect").value = value;
+
+            // Remove currect image "Fade out" class，add "Fade in"
+            b.classList.remove("fade_out");
+            b.classList.add("fade_in");
+
+        }
+
+        function start_timer() {
+            myVar = setInterval(Timer_Tick, 4000);
+        }
+
+        function stop_timer() {
+            clearInterval(myVar);
+        }
+    </script>
+
+</head>
+
+<body onload="start_timer()">
+    <input id="currect" disabled="true" value="1" hidden="hidden">
+    <input id="last" disabled="true" value="0" hidden="hidden">
+    <input id="status" disabled="true" hidden="hidden">
+
+    <!-- hidden="hidden" -->
+    <div id="ImagePanel">
+        <div id="f1" class="large Img_Selected"></div>
+        <div id="f2" class="large Img_Default"></div>
+        <div id="f3" class="large Img_Default"></div>
+        <div id="f4" class="large Img_Default"></div>
+        <div id="f5" class="large Img_Default"></div>
+    </div>
+
+    <div id="page_navigate_bar">
+        <div class="page_item_select p1" onclick="updateUI(1)"></div>
+        <div class="page_item_default p2" onclick="updateUI(2)"></div>
+        <div class="page_item_default p3" onclick="updateUI(3)"></div>
+        <div class="page_item_default p4" onclick="updateUI(4)"></div>
+        <div class="page_item_default p5" onclick="updateUI(5)"></div>
+    </div>
+
+    <button onclick="stop_timer()">stop</button>
+    <button onclick="start_timer()">start</button>
+
+    <div id="slider">
+        <div id="s1" class="largeS"></div>
+        <div id="s2" class="largeS"></div>
+        <div id="s3" class="largeS"></div>
+        <div id="s4" class="largeS"></div>
+        <div id="s5" class="largeS"></div>
+    </div>
+
+    <div id="slider">
+        <figure>
+            <img src="/Arce_Slider/images/550238.jpg" alt>
+            <img src="/Arce_Slider/images/552075.jpg" alt>
+            <img src="/Arce_Slider/images/555969.jpg" alt>
+            <img src="/Arce_Slider/images/561720.jpg" alt>
+            <img src="/Arce_Slider/images/561983.jpg" alt>
+        </figure>
+    </div>
+</body>
+
+</html>

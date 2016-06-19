@@ -1,0 +1,326 @@
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);
+:root {
+    --height: 480;
+    --width: 640;
+}
+
+
+/*http://muki.tw/tech/native-css-variables/*/
+
+
+/* calc(var(--height) * 1px); */
+
+
+/* calc(var(--width) * 1px); */
+
+html,
+body {
+    background-color: black;
+}
+
+#slides {
+    padding: 0;
+    margin: auto;
+    width: calc(var(--width) * 1px);
+    height: calc(var(--height) * 1px);
+    ;
+    display: block;
+    position: relative;
+    /*add*/
+    text-align: center;
+}
+
+#slides * {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+#slides input {
+    display: none;
+}
+
+.slide-container {
+    display: block;
+}
+
+.slide {
+    bottom: 0;
+    margin: auto;
+    opacity: 0;
+    width: calc(var(--width) * 1px);
+    height: calc(var(--height) * 1px);
+    ;
+    display: block;
+    position: absolute;
+    transform: scale(0);
+    /* 增加形狀變化，註解掉此行變成淡入淡出 */
+    transition: all .7s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*-----------------------------------------*/
+
+
+/* Label : Prev & Next hoevr_button */
+
+
+/*-----------------------------------------*/
+
+.nav {}
+
+.nav label {
+    width: 200px;
+    height: 100%;
+    display: none;
+    position: absolute;
+    opacity: 0;
+    z-index: 9;
+    cursor: pointer;
+    transition: opacity .2s;
+    color: #FFF;
+    font-size: 156pt;
+    text-align: center;
+    line-height: 380px;
+    font-family: "Varela Round", sans-serif;
+    background-color: rgba(255, 255, 255, .3);
+    text-shadow: 0px 0px 15px rgb(119, 119, 119);
+}
+
+
+/* 移動到圖片上：左右出現0.5透明度的箭頭，提示作用 */
+
+.slide:hover + .nav label {
+    opacity: 0.5;
+}
+
+
+/* 移動到箭頭上 */
+
+.nav label:hover {
+    opacity: 1;
+}
+
+
+/* 右邊箭頭往右移動 */
+
+.nav .next {
+    right: 0;
+}
+
+input:checked + .slide-container .slide {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container .nav label {
+    display: block;
+}
+
+
+/*-----------------------------------------*/
+
+
+/* 導覽列 - Checked button */
+
+
+/*-----------------------------------------*/
+
+
+/*
+.nav-dots {
+    width: 100%;
+    bottom: 9px;
+    height: 11px;
+    display: block;
+    position: absolute;
+    text-align: center;
+}
+
+.nav-dots .nav-dot {
+    top: -5px;
+    width: 11px;
+    height: 11px;
+    margin: 0 4px;
+    position: relative;
+    border-radius: 100%;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.nav-dots .nav-dot:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+input#img-1:checked ~ .nav-dots label#img-dot-1,
+input#img-2:checked ~ .nav-dots label#img-dot-2,
+input#img-3:checked ~ .nav-dots label#img-dot-3,
+input#img-4:checked ~ .nav-dots label#img-dot-4,
+input#img-5:checked ~ .nav-dots label#img-dot-5,
+input#img-6:checked ~ .nav-dots label#img-dot-6 {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/*------------------------------------------------------------------------------*/
+
+#page_navigate_bar {
+    position: relative;
+    height: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.page_item_default {
+    width: 10px;
+    height: 10px;
+    background: gray;
+    display: inline-block;
+    border-radius: 5px;
+    margin: auto 10px;
+}
+
+.page_item_select {
+    width: 10px;
+    height: 10px;
+    background: black;
+    display: inline-block;
+    border-radius: 5px;
+    margin: auto 10px;
+}
+
+.page_item:hover {
+    background: black;
+}
+
+
+/* Fade effect : Root Border */
+
+#ImagePanel {
+    position: relative;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Fade effect : 影像 尺寸 */
+
+div.large {
+    display: block;
+    width: calc(var(--width) * 1px);
+    height: calc(var(--height) * 1px);
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /*for Firefox*/
+    -moz-background-size: 100%;
+    /*for Google Chrome、Safari*/
+    -webkit-background-size: 100%;
+    /*for Opera*/
+    -o-background-size: 100%;
+    /*for IE*/
+    background-size: 100%;
+}
+
+
+/* Fade effect : 影像指定 、 Z-index 、fill mode */
+
+#f1 {
+    background-image: url(images/550238.jpg);
+    z-index: 1;
+    animation-fill-mode: forwards;
+}
+
+#f2 {
+    background-image: url(images/552075.jpg);
+    z-index: 2;
+    animation-fill-mode: forwards;
+}
+
+#f3 {
+    background-image: url(images/555969.jpg);
+    z-index: 3;
+    animation-fill-mode: forwards;
+}
+
+#f4 {
+    background-image: url(images/561720.jpg);
+    z-index: 4;
+    animation-fill-mode: forwards;
+}
+
+#f5 {
+    background-image: url(images/561983.jpg);
+    z-index: 5;
+    animation-fill-mode: forwards;
+}
+
+
+/* Fade effect : 影像 Opacity */
+
+.Img_Default {
+    opacity: 0;
+}
+
+.Img_Selected {
+    opacity: 1;
+}
+
+
+/* Fade effect : Animation*/
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+        /*初始状态 透明度为0*/
+    }
+    100% {
+        opacity: 1;
+        /*结尾状态 透明度为1*/
+    }
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        /*初始状态 透明度为0*/
+    }
+    100% {
+        opacity: 0;
+        /*结尾状态 透明度为1*/
+    }
+}
+
+.fade_in {
+    /* 名稱 */
+    -webkit-animation-name: fadeIn;
+    /* 持續時間 */
+    -webkit-animation-duration: 3s;
+    /* 播放次數 */
+    -webkit-animation-iteration-count: 1;
+    /* 延遲時間 */
+    -webkit-animation-delay: 0s;
+}
+
+.fade_out {
+    /* 名稱 */
+    -webkit-animation-name: fadeOut;
+    /* 持續時間 */
+    -webkit-animation-duration: 3s;
+    /* 播放次數 */
+    -webkit-animation-iteration-count: 1;
+    /* 延遲時間 */
+    -webkit-animation-delay: 0s;
+}

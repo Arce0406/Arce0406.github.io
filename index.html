@@ -39,22 +39,23 @@
                 y = window.innerHeight || e.clientHeight || g.clientHeight;
             /* alert(x + "," + y);*/
 
-            var lx = (x - 640) / 2,
-                ly = (y - 480) / 2;
-            /*
-            var p = document.getElementById("slides");
-            var style = p.currentStyle || window.getComputedStyle(p);
-            */
+            var lx = (x - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--width"))) / 2,
+                ly = (y - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--height"))) / 2;                       
 
-            if (lx > 0) {
-                document.getElementById("slides").style.marginLeft = lx.toString() + "px";
-                document.getElementById("slides").style.marginRight = lx.toString() + "px";
-            }
-            if (ly > 0) {
-                document.getElementById("slides").style.marginTop = ly.toString() + "px";
-                document.getElementById("slides").style.marginBottom = ly.toString() + "px";
-            }
-        }
+                    /*
+                    var p = document.getElementById("slides");
+                    var style = p.currentStyle || window.getComputedStyle(p);
+                    */
+
+                    if (lx > 0) {
+                        document.getElementById("slides").style.marginLeft = lx.toString() + "px";
+                        document.getElementById("slides").style.marginRight = lx.toString() + "px";
+                    }
+                    if (ly > 0) {
+                        document.getElementById("slides").style.marginTop = ly.toString() + "px";
+                        document.getElementById("slides").style.marginBottom = ly.toString() + "px";
+                    }
+                }
     </script>
 
     <script type="text/javascript">
@@ -141,11 +142,9 @@
             myVar = setInterval(Timer_Tick, 4000);
         }
     </script>
-
-
 </head>
 
-<body id="slides" onload="Retart_timer()">
+<body onload="Retart_timer()">
     <!-- Cloud -->
     <div id="background-wrap">
         <div class="x1">
@@ -187,68 +186,69 @@
     <input id="currect" disabled="true" value="1" hidden="hidden">
     <input id="last" disabled="true" value="0" hidden="hidden">
     <input id="status" disabled="true" hidden="hidden">
+    <div id="slides">
+        <input type="radio" name="radio-btn" id="img-1" checked />
+        <div class="slide-container">
+            <div class="slide">
+                <div id="A1" class="slide container">
 
-    <input type="radio" name="radio-btn" id="img-1" checked />
-    <div class="slide-container">
-        <div class="slide">
-            <div id="A1" class="slide container">
+                    <!-- Slide 13 -->
+                    <div id="ImagePanel">
+                        <div id="f1" class="large Img_Selected"></div>
+                        <div id="f2" class="large Img_Default"></div>
+                        <div id="f3" class="large Img_Default"></div>
+                        <div id="f4" class="large Img_Default"></div>
+                        <div id="f5" class="large Img_Default"></div>
+                    </div>
 
-                <!-- Slide 13 -->
-                <div id="ImagePanel">
-                    <div id="f1" class="large Img_Selected"></div>
-                    <div id="f2" class="large Img_Default"></div>
-                    <div id="f3" class="large Img_Default"></div>
-                    <div id="f4" class="large Img_Default"></div>
-                    <div id="f5" class="large Img_Default"></div>
+                    <div id="page_navigate_bar">
+                        <div class="page_item_select p1" onclick="updateUI(1)"></div>
+                        <div class="page_item_default p2" onclick="updateUI(2)"></div>
+                        <div class="page_item_default p3" onclick="updateUI(3)"></div>
+                        <div class="page_item_default p4" onclick="updateUI(4)"></div>
+                        <div class="page_item_default p5" onclick="updateUI(5)"></div>
+                    </div>
+
                 </div>
-
-                <div id="page_navigate_bar">
-                    <div class="page_item_select p1" onclick="updateUI(1)"></div>
-                    <div class="page_item_default p2" onclick="updateUI(2)"></div>
-                    <div class="page_item_default p3" onclick="updateUI(3)"></div>
-                    <div class="page_item_default p4" onclick="updateUI(4)"></div>
-                    <div class="page_item_default p5" onclick="updateUI(5)"></div>
-                </div>
-
+            </div>
+            <div class="nav">
+                <label for="img-3" class="prev">&#x2039;</label>
+                <label for="img-2" class="next">&#x203a;</label>
             </div>
         </div>
-        <div class="nav">
-            <label for="img-3" class="prev">&#x2039;</label>
-            <label for="img-2" class="next">&#x203a;</label>
+
+        <input type="radio" name="radio-btn" id="img-2" />
+        <div class="slide-container">
+            <div class="slide">
+                <img src="http://farm9.staticflickr.com/8504/8365873811_d32571df3d_z.jpg" />
+            </div>
+            <div class="nav">
+                <label for="img-1" class="prev">&#x2039;</label>
+                <label for="img-3" class="next">&#x203a;</label>
+            </div>
         </div>
+
+
+        <input type="radio" name="radio-btn" id="img-3" />
+        <div class="slide-container">
+            <div class="slide">
+                <img src="http://farm9.staticflickr.com/8055/8098750623_66292a35c0_z.jpg" />
+            </div>
+            <div class="nav">
+                <label for="img-2" class="prev">&#x2039;</label>
+                <label for="img-1" class="next">&#x203a;</label>
+            </div>
+        </div>
+
+
+        <li class="nav-dots">
+            <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+            <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+            <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+            <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+            <label for="img-5" class="nav-dot" id="img-dot-5"></label>
+        </li>
     </div>
-
-    <input type="radio" name="radio-btn" id="img-2" />
-    <div class="slide-container">
-        <div class="slide">
-            <img src="http://farm9.staticflickr.com/8504/8365873811_d32571df3d_z.jpg" />
-        </div>
-        <div class="nav">
-            <label for="img-1" class="prev">&#x2039;</label>
-            <label for="img-3" class="next">&#x203a;</label>
-        </div>
-    </div>
-
-
-    <input type="radio" name="radio-btn" id="img-3" />
-    <div class="slide-container">
-        <div class="slide">
-            <img src="http://farm9.staticflickr.com/8055/8098750623_66292a35c0_z.jpg" />
-        </div>
-        <div class="nav">
-            <label for="img-2" class="prev">&#x2039;</label>
-            <label for="img-1" class="next">&#x203a;</label>
-        </div>
-    </div>
-
-
-    <li class="nav-dots">
-        <label for="img-1" class="nav-dot" id="img-dot-1"></label>
-        <label for="img-2" class="nav-dot" id="img-dot-2"></label>
-        <label for="img-3" class="nav-dot" id="img-dot-3"></label>
-        <label for="img-4" class="nav-dot" id="img-dot-4"></label>
-        <label for="img-5" class="nav-dot" id="img-dot-5"></label>
-    </li>
 </body>
 
 </html>

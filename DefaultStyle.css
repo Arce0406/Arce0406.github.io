@@ -13,10 +13,12 @@
 */
 
 
+/*更動大小 : Js也要改*/
+
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 :root {
-    --height: 480;
-    --width: 640;
+    --height: 600;
+    --width: 800;
 }
 
 
@@ -33,7 +35,6 @@
     margin: auto;
     width: calc(var(--width) * 1px);
     height: calc(var(--height) * 1px);
-    ;
     display: block;
     position: relative;
     /*add*/
@@ -63,7 +64,6 @@
     opacity: 0;
     width: calc(var(--width) * 1px);
     height: calc(var(--height) * 1px);
-    ;
     display: block;
     position: absolute;
     transform: scale(0);
@@ -217,9 +217,8 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 
 #ImagePanel {
     position: relative;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    height: calc(var(--height) * 1px);
+    margin: auto;
 }
 
 
@@ -233,7 +232,7 @@ div.large {
     position: absolute;
     left: 0;
     right: 0;
-    margin: auto;
+    margin: 0;
     /*for Firefox*/
     -moz-background-size: 100%;
     /*for Google Chrome、Safari*/
@@ -334,6 +333,7 @@ div.large {
     /* 延遲時間 */
     -webkit-animation-delay: 0s;
 }
+
 
 /* ----------------------------------------------
 

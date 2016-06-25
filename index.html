@@ -29,33 +29,64 @@
             Relocated();
         });
         addEvent(window, "resize", function (event) {
-            Relocated();
+            if (document.getElementById("A1").style.opacity != "0.0")
+                Relocated();
+            else
+                Relocated_Video();
+
         });
 
         function Relocated() {
+
+            var e = document.documentElement,
+                g = document.getElementsByTagName('body')[0],
+                x = window.innerWidth || e.clientWidth || g.clientWidth,
+                y = window.innerHeight || e.clientHeight || g.clientHeight;
+
+            document.querySelector("html").style.setProperty("--width", window.getComputedStyle(document.querySelector("html")).getPropertyValue("--width_default"));
+            document.querySelector("html").style.setProperty("--height", window.getComputedStyle(document.querySelector("html")).getPropertyValue("--height_default"));
+
+            var lx = (x - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--width_default"))) / 2,
+                ly = (y - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--height_default"))) / 2;
+
+
+            if (lx > 0) {
+                document.getElementById("slides").style.marginLeft = lx.toString() + "px";
+                document.getElementById("slides").style.marginRight = lx.toString() + "px";
+            }
+
+            if (ly > 0) {
+                document.getElementById("slides").style.marginTop = ly.toString() + "px";
+                document.getElementById("slides").style.marginBottom = ly.toString() + "px";
+            }
+        }
+
+        function Relocated_Video() {
+
+            /*http://www.ericponto.com/blog/2014/09/17/share-css-variables-with-javascript/*/
+
             var e = document.documentElement,
                 g = document.getElementsByTagName('body')[0],
                 x = window.innerWidth || e.clientWidth || g.clientWidth,
                 y = window.innerHeight || e.clientHeight || g.clientHeight;
             /* alert(x + "," + y);*/
 
-            var lx = (x - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--width"))) / 2,
-                ly = (y - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--height"))) / 2;                       
+            document.querySelector("html").style.setProperty("--width", window.getComputedStyle(document.querySelector("html")).getPropertyValue("--width_video"));
+            document.querySelector("html").style.setProperty("--height", window.getComputedStyle(document.querySelector("html")).getPropertyValue("--height_video"));
+            var lx = (x - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--width_video"))) / 2,
+                ly = (y - parseInt(window.getComputedStyle(document.querySelector("html")).getPropertyValue("--height_video"))) / 2;
 
-                    /*
-                    var p = document.getElementById("slides");
-                    var style = p.currentStyle || window.getComputedStyle(p);
-                    */
 
-                    if (lx > 0) {
-                        document.getElementById("slides").style.marginLeft = lx.toString() + "px";
-                        document.getElementById("slides").style.marginRight = lx.toString() + "px";
-                    }
-                    if (ly > 0) {
-                        document.getElementById("slides").style.marginTop = ly.toString() + "px";
-                        document.getElementById("slides").style.marginBottom = ly.toString() + "px";
-                    }
-                }
+            if (lx > 0) {
+                document.getElementById("slides").style.marginLeft = lx.toString() + "px";
+                document.getElementById("slides").style.marginRight = lx.toString() + "px";
+            }
+
+            if (ly > 0) {
+                document.getElementById("slides").style.marginTop = ly.toString() + "px";
+                document.getElementById("slides").style.marginBottom = ly.toString() + "px";
+            }
+        }
     </script>
 
     <script type="text/javascript">
@@ -95,7 +126,7 @@
             b.classList.remove("fade_out");
             b.classList.add("fade_in");
 
-            Retart_timer();
+            Restart_timer();
         }
 
         var myVar;
@@ -137,14 +168,30 @@
 
         }
 
-        function Retart_timer() {
+        var flag = false;
+
+        function Restart_timer() {
             clearInterval(myVar);
-            myVar = setInterval(Timer_Tick, 4000);
+            myVar = setInterval(Timer_Tick, 8000);
+        }
+
+        // 初始化載入 : 
+        function unfade() {
+            var op = 0.0; // initial opacity
+
+            var timer = setInterval(function () {
+                if (op >= 1) {
+                    clearInterval(timer);
+                    Restart_timer();
+                }
+                document.getElementById("slides").style.opacity = op;
+                op += 0.01;
+            }, 30);
         }
     </script>
 </head>
 
-<body onload="Retart_timer()">
+<body onload="unfade()">
     <!-- Cloud -->
     <div id="background-wrap">
         <div class="x1">
@@ -187,7 +234,7 @@
     <input id="last" disabled="true" value="0" hidden="hidden">
     <input id="status" disabled="true" hidden="hidden">
     <div id="slides">
-        <input type="radio" name="radio-btn" id="img-1" checked />
+        <input type="radio" name="radio-btn" id="img-1" checked hidden="hidden" />
         <div class="slide-container">
             <div class="slide">
                 <div id="A1" class="slide container">
@@ -199,6 +246,14 @@
                         <div id="f3" class="large Img_Default"></div>
                         <div id="f4" class="large Img_Default"></div>
                         <div id="f5" class="large Img_Default"></div>
+                        <div id="f6" class="large Img_Default"></div>
+                        <div id="f7" class="large Img_Default"></div>
+                        <div id="f8" class="large Img_Default"></div>
+                        <div id="f9" class="large Img_Default"></div>
+                        <div id="f10" class="large Img_Default"></div>
+                        <div id="f11" class="large Img_Default"></div>
+                        <div id="f12" class="large Img_Default"></div>
+                        <div id="f13" class="large Img_Default"></div>
                     </div>
 
                     <div id="page_navigate_bar">
@@ -207,39 +262,47 @@
                         <div class="page_item_default p3" onclick="updateUI(3)"></div>
                         <div class="page_item_default p4" onclick="updateUI(4)"></div>
                         <div class="page_item_default p5" onclick="updateUI(5)"></div>
+                        <div class="page_item_default p6" onclick="updateUI(6)"></div>
+                        <div class="page_item_default p7" onclick="updateUI(7)"></div>
+                        <div class="page_item_default p8" onclick="updateUI(8)"></div>
+                        <div class="page_item_default p9" onclick="updateUI(9)"></div>
+                        <div class="page_item_default p10" onclick="updateUI(10)"></div>
+                        <div class="page_item_default p11" onclick="updateUI(11)"></div>
+                        <div class="page_item_default p12" onclick="updateUI(12)"></div>
+                        <div class="page_item_default p13" onclick="updateUI(13)"></div>
                     </div>
 
                 </div>
             </div>
             <div class="nav">
-                <label for="img-3" class="prev">&#x2039;</label>
-                <label for="img-2" class="next">&#x203a;</label>
+                <label for="img-2" class="prev" onclick="Relocated_Video()">&#x2039;</label>
+                <label for="img-2" class="next" onclick="Relocated_Video()">&#x203a;</label>
             </div>
         </div>
 
-        <input type="radio" name="radio-btn" id="img-2" />
+        <input type="radio" name="radio-btn" id="img-2" hidden="hidden" />
         <div class="slide-container">
             <div class="slide">
-                <img src="http://farm9.staticflickr.com/8504/8365873811_d32571df3d_z.jpg" />
+                <video src="Videos/%E6%AD%A2%E6%B0%B4%E4%B9%8B%E6%B9%96.mp4" poster="Images/Secret%20Project.png" width="640" height="480" preload="metadata" controls></video>
             </div>
             <div class="nav">
-                <label for="img-1" class="prev">&#x2039;</label>
-                <label for="img-3" class="next">&#x203a;</label>
+                <label for="img-1" class="prev" onclick="Relocated()">&#x2039;</label>
+                <label for="img-1" class="next" onclick="Relocated()">&#x203a;</label>
             </div>
         </div>
 
-
-        <input type="radio" name="radio-btn" id="img-3" />
+        <!--
+        <input type="radio" name="radio-btn" id="img-3" hidden="hidden" />
         <div class="slide-container">
             <div class="slide">
                 <img src="http://farm9.staticflickr.com/8055/8098750623_66292a35c0_z.jpg" />
             </div>
             <div class="nav">
-                <label for="img-2" class="prev">&#x2039;</label>
-                <label for="img-1" class="next">&#x203a;</label>
+                <label for="img-2" class="prev" onclick="Relocated(2)">&#x2039;</label>
+                <label for="img-1" class="next" onclick="Relocated(1)">&#x203a;</label>
             </div>
         </div>
-
+-->
 
         <li class="nav-dots">
             <label for="img-1" class="nav-dot" id="img-dot-1"></label>
